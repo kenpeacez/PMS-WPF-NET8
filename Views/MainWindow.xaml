@@ -1,0 +1,324 @@
+﻿<Window x:Class="PMS_WPF_NET8.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PMS_WPF_NET8"
+        xmlns:viewModels="clr-namespace:PMS_WPF_NET8.ViewModels"
+        xmlns:converters="clr-namespace:PMS_WPF_NET8.Converters"
+        mc:Ignorable="d"
+        Title="Pharmacy Management System WPF .NET8" Height="768" Width="1200" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <!-- Define the BooleanToEditSaveConverter here -->
+        <converters:BooleanToEditSaveConverter x:Key="BooleanToEditSaveConverter" />
+    </Window.Resources>
+    <Grid>
+        <TabControl Margin="0,23,0,0">
+            <TabItem Header="New Patient" Margin="0,0,-100,0">
+                <Grid Background="#FFE5E5E5" Height="703">
+                    <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="66,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" Height="23" Text="" FontWeight="Bold" FontSize="14" CharacterCasing="Upper" MaxLength="70"/>
+                    <Label Content="Name :" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,-0.051" FontSize="14"/>
+                    <Label Content="IC No. :" HorizontalAlignment="Left" Margin="11,43,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <TextBox x:Name="txtICNo" HorizontalAlignment="Left" Margin="66,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23" Text="" MaxLength="14" FontWeight="Bold" FontSize="14" />
+                    <DatePicker x:Name="dtpDateSaved" HorizontalAlignment="Left" Margin="66,87,0,0" VerticalAlignment="Top" Width="120" SelectedDateFormat="Short"/>
+                    <Label Content="Date :" HorizontalAlignment="Left" Margin="25,85,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Age : " HorizontalAlignment="Left" Margin="212,36,0,0" VerticalAlignment="Top" Height="33" FontSize="10"/>
+                    <Label Content="Gender : " HorizontalAlignment="Left" Margin="197,57,0,0" VerticalAlignment="Top" FontSize="10"/>
+                    <Label x:Name="lblAge" Content="  " HorizontalAlignment="Left" Margin="248,36,0,0" VerticalAlignment="Top" FontSize="10" Width="27"/>
+                    <Label x:Name="lblGender" Content="  " HorizontalAlignment="Left" Margin="248,58,0,0" VerticalAlignment="Top" FontSize="10" Width="54"/>
+
+
+                    <DatePicker x:Name="dtpDateCollection" HorizontalAlignment="Left" Margin="331,87,0,0" VerticalAlignment="Top" Width="179" SelectedDateFormat="Long"/>
+                    <Label Content="Collection Date / IOU :" HorizontalAlignment="Left" Margin="198,85,0,0" VerticalAlignment="Top"/>
+                    <Label Content="See Doctor Date :" HorizontalAlignment="Left" Margin="521,85,0,0" VerticalAlignment="Top"/>
+                    <DatePicker x:Name="dtpDateSeeDoctor" HorizontalAlignment="Left" Margin="628,87,0,0" VerticalAlignment="Top" Width="179" SelectedDateFormat="Long"/>
+                    <ComboBox x:Name="cbAddDays" HorizontalAlignment="Left" Margin="430,41,0,0" VerticalAlignment="Top" Width="46"/>
+                    <Label Content="Duration" HorizontalAlignment="Left" Margin="374,61,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDurationMaster" HorizontalAlignment="Left" Margin="430,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" IsEnabled="False" FontWeight="Bold"/>
+                    <Label Content="days" HorizontalAlignment="Left" Margin="475,62,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnIOU" Content="Past Med" HorizontalAlignment="Left" Margin="531,13,0,0" VerticalAlignment="Top" Width="82"/>
+                    <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="628,13,0,0" VerticalAlignment="Top" Width="82"/>
+                    <Button x:Name="btnCheckICMySPR" Content="Check IC" HorizontalAlignment="Left" Margin="531,44,0,0" VerticalAlignment="Top" Width="82"/>
+                    <Button x:Name="btnPrintPreview" Content="Print Preview" HorizontalAlignment="Left" Margin="628,44,0,0" VerticalAlignment="Top" Width="82"/>
+                    <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="1044,644,0,0" VerticalAlignment="Top" Width="97" Height="25" Click="SavePatientButton_Click"/>
+                    <Button x:Name="btnClearAll" Content="Clear All" HorizontalAlignment="Left" Margin="870,649,0,0" VerticalAlignment="Top" Width="82"/>
+                    <CheckBox x:Name="chboxNoICNumber" Content="Tick if No IC or Baby" HorizontalAlignment="Left" Margin="280,44,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Drug Prescription" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top"/>
+
+
+                    <Label Content="Drug Name" HorizontalAlignment="Left" Margin="39,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Strength" HorizontalAlignment="Left" Margin="554,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Unit" HorizontalAlignment="Left" Margin="617,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Dose" HorizontalAlignment="Left" Margin="704,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Frequency" HorizontalAlignment="Left" Margin="762,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Duration" HorizontalAlignment="Left" Margin="835,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Total Quantity" HorizontalAlignment="Left" Margin="904,138,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                    <Label Content="Prescriber Category" HorizontalAlignment="Left" Margin="1025,138,0,0" VerticalAlignment="Top" FontSize="14"/>
+
+                    <Grid Height="370" Margin="0,0,0,0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,-16,0,16">
+                            <StackPanel Margin="10">
+                                <UniformGrid Columns="1">
+
+                                    <StackPanel>
+                                        <!-- Drug 1 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="1" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox IsEditable="True" Width="500" Height="25" Name="cbDrug1" ItemsSource="{Binding DrugNames}" SelectedItem="{Binding SelectedDrugName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Label x:Name="lblStrD1" Content="{Binding Strength}" Width="55" Height="25" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                            <Label x:Name="lblUnitD1" Content="{Binding Unit}" Width="80" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                            <TextBox x:Name="txtDoseD1" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD1" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD1" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD1" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD1" Content="{Binding PrescriberCategory}" Width="34" Height="25" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 2 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="2" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug2" IsEditable="True" Width="500" Height="25" />
+                                            <Label x:Name="lblStrD2" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD2" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD2" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD2" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD2" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD2" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD2" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Repeat for 3 to 10 -->
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="3" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug3" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD3" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD3" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD3" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD3" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD3" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD3" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD3" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 4 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="4" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug4" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD4" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD4" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD4" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD4" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD4" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD4" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD4" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 5 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="5" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug5" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD5" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD5" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD5" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD5" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD5" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD5" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD5" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 6 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="6" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug6" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD6" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD6" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD6" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD6" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD6" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD6" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD6" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 7 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="7" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug7" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD7" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD7" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD7" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD7" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD7" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD7" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD7" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 8 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="8" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug8" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD8" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD8" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD8" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD8" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD8" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD8" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD8" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 9 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="9" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug9" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD9" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD9" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD9" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD9" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD9" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD9" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD9" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Drug 10 -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
+                                            <Label Content="10" Width="25" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="cbDrug10" IsEditable="True" Width="500" Height="25"/>
+                                            <Label x:Name="lblStrD10" Content=" " Width="55" Height="25"/>
+                                            <Label x:Name="lblUnitD10" Content=" " Width="80" Height="25"/>
+                                            <TextBox x:Name="txtDoseD10" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
+                                            <TextBox x:Name="txtFreqD10" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtDurationD10" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <TextBox x:Name="txtQTYD10" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD10" Content=" " Width="34" Margin="65,0,0,0"/>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </UniformGrid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+
+
+                    <Label x:Name="lblPreCatagoryD2_Copy7" Content="  " HorizontalAlignment="Left" Margin="1055,484,0,0" VerticalAlignment="Top" FontSize="14" Width="34"/>
+                    <Label Content="Insulin Prescription" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Insulin Name" HorizontalAlignment="Left" Margin="39,540,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Strength" HorizontalAlignment="Left" Margin="464,540,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Unit" HorizontalAlignment="Left" Margin="532,540,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Morning Dose" HorizontalAlignment="Left" Margin="586,540,0,0" VerticalAlignment="Top" FontSize="11"/>
+                    <Label Content="Noon Dose" HorizontalAlignment="Left" Margin="666,540,0,0" VerticalAlignment="Top" FontSize="11"/>
+                    <Label Content="Duration" HorizontalAlignment="Left" Margin="879,540,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <Label Content="Total Dose" HorizontalAlignment="Left" Margin="945,540,0,0" VerticalAlignment="Top"  FontSize="14"/>
+                    <Label Content="Afternoon Dose" HorizontalAlignment="Left" Margin="731,540,0,0" VerticalAlignment="Top" FontSize="11"/>
+                    <Label Content="Night Dose" HorizontalAlignment="Left" Margin="815,540,0,0" VerticalAlignment="Top" FontSize="11"/>
+                    <Label Content="POM" HorizontalAlignment="Left" Margin="1024,540,0,0" VerticalAlignment="Top"  FontSize="14"/>
+                    <Label Content="Cartridge Qty." HorizontalAlignment="Left" Margin="1072,540,0,0" VerticalAlignment="Top"  FontSize="14"/>
+
+                    <Label Content="1" HorizontalAlignment="Left" Margin="12,568,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <ComboBox x:Name="cbInsulin1" IsEditable="True" HorizontalAlignment="Left" Margin="40,570,0,0" VerticalAlignment="Top" Width="413" FontSize="14"/>
+                    <Label x:Name="lblStrInsulin1" Content="  " HorizontalAlignment="Left" Margin="467,570,0,0" VerticalAlignment="Top" Width="55" FontSize="14" Height="22"/>
+                    <Label x:Name="lblUnitInsulin1" Content="  " HorizontalAlignment="Left" Margin="533,570,0,0" VerticalAlignment="Top" Width="52" FontSize="14" Height="22"/>
+                    <TextBox x:Name="txtIn1MorDose" HorizontalAlignment="Left" Margin="596,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn1NoonDose" HorizontalAlignment="Left" Margin="672,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn1AfterNoonDose" HorizontalAlignment="Left" Margin="743,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn1NightDose" HorizontalAlignment="Left" Margin="821,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn1Duration" HorizontalAlignment="Left" Margin="886,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn1TotalDose" HorizontalAlignment="Left" Margin="951,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="58" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn1POM" HorizontalAlignment="Left" Margin="1025,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="39" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn1CartQTY" HorizontalAlignment="Left" Margin="1095,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46" Height="22" FontSize="14" MaxLength="3"/>
+
+                    <Label Content="2" HorizontalAlignment="Left" Margin="12,603,0,0" VerticalAlignment="Top" FontSize="14"/>
+                    <ComboBox x:Name="cbInsulin2" IsEditable="True" HorizontalAlignment="Left" Margin="40,605,0,0" VerticalAlignment="Top" Width="413" FontSize="14"/>
+                    <Label x:Name="lblStrInsulin2" Content="  " HorizontalAlignment="Left" Margin="467,605,0,0" VerticalAlignment="Top" Width="55" FontSize="14" Height="22"/>
+                    <Label x:Name="lblUnitInsulin2" Content="  " HorizontalAlignment="Left" Margin="533,605,0,0" VerticalAlignment="Top" Width="52" FontSize="14" Height="22"/>
+                    <TextBox x:Name="txtIn2MorDose" HorizontalAlignment="Left" Margin="596,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn2NoonDose" HorizontalAlignment="Left" Margin="672,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn2AfterNoonDose" HorizontalAlignment="Left" Margin="743,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn2NightDose" HorizontalAlignment="Left" Margin="821,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="2"/>
+                    <TextBox x:Name="txtIn2Duration" HorizontalAlignment="Left" Margin="886,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn2TotalDose" HorizontalAlignment="Left" Margin="951,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="58" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn2POM" HorizontalAlignment="Left" Margin="1025,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="39" Height="22" FontSize="14" MaxLength="3"/>
+                    <TextBox x:Name="txtIn2CartQTY" HorizontalAlignment="Left" Margin="1095,605,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46" Height="22" FontSize="14" MaxLength="3"/>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Medicine" Margin="100,0,-200,0">
+                <Grid Background="#FFE5E5E5" Height="390" Margin="1,0,-1,0">
+                    <DataGrid   ItemsSource="{Binding DrugList, UpdateSourceTrigger=PropertyChanged}" 
+                                IsReadOnly="{Binding IsReadOnly}" 
+                                AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding DrugID}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Drug Name" Binding="{Binding DrugName}" />
+                            <DataGridTextColumn Header="Strength" Binding="{Binding Strength}" />
+                            <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" />
+                            <DataGridTextColumn Header="Dosage Form" Binding="{Binding DosageForm}" />
+                            <DataGridTextColumn Header="Prescriber Category" Binding="{Binding PrescriberCategory}" />
+                            <DataGridTextColumn Header="Remark" Binding="{Binding Remark}" />
+                            <DataGridTextColumn Header="Default Max Qty" Binding="{Binding DefaultMaxQty}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Background="#FFE5E5E5" Height="0" Margin="0,-390,0,0">
+
+                        <TextBox x:Name="txtSearchDrug" HorizontalAlignment="Left" Margin="70,-46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224" Height="22" FontSize="14" MaxLength="50"/>
+                        <Button x:Name="btnUpdate" HorizontalAlignment="Left" Margin="345,-46,0,0" VerticalAlignment="Top" Width="89" Height="23" Content="{Binding IsReadOnly, Converter={StaticResource BooleanToEditSaveConverter}}"
+        Command="{Binding ToggleEditCommand}"/>
+
+                        <Button x:Name="btnDelete" Content="Delete Selected Row" HorizontalAlignment="Left" Margin="456,-46,0,0" VerticalAlignment="Top" Width="124" Height="23" Click="DeleteSelectedRowButton_Click"/>
+                        <Label Content="Search" HorizontalAlignment="Left" Margin="70,-74,0,0" VerticalAlignment="Top" Height="23" Width="53"/>
+
+                        <TextBox x:Name="txtNewDrugName" HorizontalAlignment="Left" Margin="70,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Drug Name" HorizontalAlignment="Left" Margin="70,-150,0,0" VerticalAlignment="Top" Height="27" Width="90"/>
+                        <Label Content="Strength" HorizontalAlignment="Left" Margin="456,-150,0,0" VerticalAlignment="Top" Height="27" Width="90"/>
+                        <TextBox x:Name="txtDrugStr" HorizontalAlignment="Left" Margin="456,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Unit" HorizontalAlignment="Left" Margin="543,-150,0,0" VerticalAlignment="Top" Height="27" Width="90"/>
+                        <TextBox x:Name="txtDrugUnit" HorizontalAlignment="Left" Margin="543,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Dosage Form" HorizontalAlignment="Left" Margin="631,-150,0,0" VerticalAlignment="Top" Height="27" Width="90"/>
+                        <TextBox x:Name="txtDrugDoseForm" HorizontalAlignment="Left" Margin="631,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Prescriber Category" HorizontalAlignment="Left" Margin="734,-150,0,0" VerticalAlignment="Top" Height="27" Width="116"/>
+                        <TextBox x:Name="txtDrugPresCat" HorizontalAlignment="Left" Margin="735,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Default Max Qty" HorizontalAlignment="Left" Margin="735,-101,0,0" VerticalAlignment="Top" Height="27" Width="116"/>
+                        <TextBox x:Name="txtDefaultMaxQty" HorizontalAlignment="Left" Margin="735,-73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59" Height="22" FontSize="14" MaxLength="50"/>
+                        <Label Content="Remark" HorizontalAlignment="Left" Margin="850,-150,0,0" VerticalAlignment="Top" Height="27" Width="116"/>
+                        <TextBox x:Name="txtDrugRemark" HorizontalAlignment="Left" Margin="855,-123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" Height="61" FontSize="14" MaxLength="200"/>
+                        <Button x:Name="btnAddNewDrug" Content="Add Drug" HorizontalAlignment="Left" Margin="855,-46,0,0" VerticalAlignment="Top" Width="88" Height="23" Click="btnAddNewDrug_Click"/>
+                    </Grid>
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="Logs" Margin="200,0,-300,0">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Previous Patient" Margin="0,0, -100,0" >
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Records" Margin="100,0,-200,0">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Database" Margin="300,0,-400,0">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Settings" Margin="400,0,-500,0">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Database Connection" HorizontalAlignment="Left" Margin="28,38,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Server Name: " HorizontalAlignment="Left" Margin="28,64,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Username: " HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Password: " HorizontalAlignment="Left" Margin="28,106,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Database Name: " HorizontalAlignment="Left" Margin="28,126,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDBServerAddress" HorizontalAlignment="Left" Margin="125,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="txtDBUserID" HorizontalAlignment="Left" Margin="125,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <PasswordBox x:Name="txtDBPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,110,0,0" Width="150"/>
+                    <TextBox x:Name="txtDBName" HorizontalAlignment="Left" Margin="125,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
