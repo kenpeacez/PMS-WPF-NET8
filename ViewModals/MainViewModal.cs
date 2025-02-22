@@ -10,17 +10,14 @@ namespace PMS_WPF_NET8.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         private bool _isReadOnly = true;
-        private string _selectedDrugName;
-        private string _strength;
-        private string _unit;
-        private string _prescriberCategory;
-
-        public ObservableCollection<NewDrugModal> DrugList { get; set; } = new ObservableCollection<NewDrugModal>();
-        public ObservableCollection<string> DrugNames { get; set; } = new ObservableCollection<string>();
-        public Dictionary<string, NewDrugModal> DrugDetails { get; set; } = new Dictionary<string, NewDrugModal>();
-
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -30,11 +27,149 @@ namespace PMS_WPF_NET8.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string _selectedDrugName;
+        private string _selectedDrugName1;
+        private string _strength1;
+        private string _unit1;
+        private string _prescriberCategory1;
+        private string _selectedDrugName2;
+        private string _strength2;
+        private string _unit2;
+        private string _prescriberCategory2;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        public ObservableCollection<NewDrugModal> DrugList { get; set; } = new ObservableCollection<NewDrugModal>();
+        public ObservableCollection<string> DrugNames { get; set; } = new ObservableCollection<string>();
+        public Dictionary<string, NewDrugModal> DrugDetails { get; set; } = new Dictionary<string, NewDrugModal>();
+
+        public void CalculateTotalQuantity(string strengthContent, string doseText, string freqText, string durationText, out string totalQuantity)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            try
+            {
+                double strength = double.TryParse(strengthContent, out double s) ? s : 0;
+                double dose = double.TryParse(doseText, out double d) ? d : 0;
+                double frequency = double.TryParse(freqText, out double f) ? f : 0;
+                double duration = double.TryParse(durationText, out double dur) ? dur : 0;
+
+                double total = (dose / strength) * frequency * duration;
+                totalQuantity = total.ToString();
+            }
+            catch
+            {
+                totalQuantity = "Error";
+            }
+        }
+        public string Strength1
+        {
+            get => _strength1;
+            set
+            {
+                _strength1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Unit1
+        {
+            get => _unit1;
+            set
+            {
+                _unit1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PrescriberCategory1
+        {
+            get => _prescriberCategory1;
+            set
+            {
+                _prescriberCategory1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SelectedDrugName1
+        {
+            get => _selectedDrugName1;
+            set
+            {
+                _selectedDrugName1 = value;
+                OnPropertyChanged();
+                UpdateDrugDetails1();
+            }
+        }
+        private void UpdateDrugDetails1()
+        {
+            if (!string.IsNullOrEmpty(SelectedDrugName1) && DrugDetails.ContainsKey(SelectedDrugName1))
+            {
+                var selectedDrug = DrugDetails[SelectedDrugName1];
+                Strength1 = selectedDrug.Strength;
+                Unit1 = selectedDrug.Unit;
+                PrescriberCategory1 = selectedDrug.PrescriberCategory;
+            }
+            else
+            {
+                Strength1 = "";
+                Unit1 = "";
+                PrescriberCategory1 = "";
+            }
+        }
+
+        public string SelectedDrugName2
+        {
+            get => _selectedDrugName2;
+            set
+            {
+                _selectedDrugName2 = value;
+                OnPropertyChanged();
+                UpdateDrugDetails2();
+            }
+        }
+
+        public string Strength2
+        {
+            get => _strength2;
+            set
+            {
+                _strength2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Unit2
+        {
+            get => _unit2;
+            set
+            {
+                _unit2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PrescriberCategory2
+        {
+            get => _prescriberCategory2;
+            set
+            {
+                _prescriberCategory2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void UpdateDrugDetails2()
+        {
+            if (!string.IsNullOrEmpty(SelectedDrugName2) && DrugDetails.ContainsKey(SelectedDrugName2))
+            {
+                var selectedDrug = DrugDetails[SelectedDrugName2];
+                Strength2 = selectedDrug.Strength;
+                Unit2 = selectedDrug.Unit;
+                PrescriberCategory2 = selectedDrug.PrescriberCategory;
+            }
+            else
+            {
+                Strength2 = "";
+                Unit2 = "";
+                PrescriberCategory2 = "";
+            }
         }
 
         public ICommand ToggleEditCommand => new RelayCommand(ToggleEdit);
@@ -52,48 +187,6 @@ namespace PMS_WPF_NET8.ViewModels
             }
         }
 
-        public string SelectedDrugName
-        {
-            get => _selectedDrugName;
-            set
-            {
-                _selectedDrugName = value;
-                OnPropertyChanged();
-                UpdateDrugDetails();
-            }
-        }
-
-        public string Strength
-        {
-            get => _strength;
-            set
-            {
-                _strength = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Unit
-        {
-            get => _unit;
-            set
-            {
-                _unit = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string PrescriberCategory
-        {
-            get => _prescriberCategory;
-            set
-            {
-                _prescriberCategory = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // ✅ FIXED: Populate `DrugDetails` dictionary
         public void LoadData()
         {
             try
@@ -107,7 +200,7 @@ namespace PMS_WPF_NET8.ViewModels
                     {
                         DrugList.Clear();
                         DrugNames.Clear();
-                        DrugDetails.Clear(); // Ensure it's cleared before adding
+                        DrugDetails.Clear();
 
                         while (reader.Read())
                         {
@@ -127,7 +220,7 @@ namespace PMS_WPF_NET8.ViewModels
 
                             DrugList.Add(drug);
                             DrugNames.Add(drugName);
-                            DrugDetails[drugName] = drug; // Store details for lookup
+                            DrugDetails[drugName] = drug;
                         }
                     }
                 }
@@ -135,25 +228,6 @@ namespace PMS_WPF_NET8.ViewModels
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading data: " + ex.Message);
-            }
-        }
-
-        // ✅ FIXED: Ensure `SelectedDrugName` updates label values
-        private void UpdateDrugDetails()
-        {
-            // MessageBox.Show(SelectedDrugName);
-            if (!string.IsNullOrEmpty(SelectedDrugName) && DrugDetails.ContainsKey(SelectedDrugName))
-            {
-                var selectedDrug = DrugDetails[SelectedDrugName];
-                Strength = selectedDrug.Strength;
-                Unit = selectedDrug.Unit;
-                PrescriberCategory = selectedDrug.PrescriberCategory;
-            }
-            else
-            {
-                Strength = "";
-                Unit = "";
-                PrescriberCategory = "";
             }
         }
 

@@ -67,27 +67,31 @@
                                         <!-- Drug 1 -->
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
                                             <Label Content="1" Width="25" VerticalAlignment="Center"/>
-                                            <ComboBox IsEditable="True" Width="500" Height="25" Name="cbDrug1" ItemsSource="{Binding DrugNames}" SelectedItem="{Binding SelectedDrugName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                            <Label x:Name="lblStrD1" Content="{Binding Strength}" Width="55" Height="25" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                                            <Label x:Name="lblUnitD1" Content="{Binding Unit}" Width="80" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                            <TextBox x:Name="txtDoseD1" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
-                                            <TextBox x:Name="txtFreqD1" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
-                                            <TextBox x:Name="txtDurationD1" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
-                                            <TextBox x:Name="txtQTYD1" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
-                                            <Label x:Name="lblPreCatagoryD1" Content="{Binding PrescriberCategory}" Width="34" Height="25" Margin="65,0,0,0"/>
+                                            <ComboBox IsEditable="True" Width="500" Height="25" Name="cbDrug1" 
+                                              ItemsSource="{Binding DrugNames}" 
+                                              SelectedItem="{Binding SelectedDrugName1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Label x:Name="lblStrD1" Content="{Binding Strength1}" Width="55" Height="25" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                            <Label x:Name="lblUnitD1" Content="{Binding Unit1}" Width="80" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                            <TextBox x:Name="txtDoseD1" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0" TextChanged="CalculateTotalQuantity"/>
+                                            <TextBox x:Name="txtFreqD1" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0" TextChanged="CalculateTotalQuantity"/>
+                                            <TextBox x:Name="txtDurationD1" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0" TextChanged="CalculateTotalQuantity"/>
+                                            <TextBox x:Name="txtQTYD1" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0" IsReadOnly="False"/>
+                                            <Label x:Name="lblPreCatagoryD1" Content="{Binding PrescriberCategory1}" Width="34" Height="25" Margin="65,0,0,0"/>
                                         </StackPanel>
 
                                         <!-- Drug 2 -->
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Height="30">
                                             <Label Content="2" Width="25" VerticalAlignment="Center"/>
-                                            <ComboBox x:Name="cbDrug2" IsEditable="True" Width="500" Height="25" />
-                                            <Label x:Name="lblStrD2" Content=" " Width="55" Height="25"/>
-                                            <Label x:Name="lblUnitD2" Content=" " Width="80" Height="25"/>
-                                            <TextBox x:Name="txtDoseD2" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0"/>
-                                            <TextBox x:Name="txtFreqD2" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0"/>
-                                            <TextBox x:Name="txtDurationD2" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0"/>
+                                            <ComboBox x:Name="cbDrug2" IsEditable="True" Width="500" Height="25" 
+                                              ItemsSource="{Binding DrugNames}" 
+                                              SelectedItem="{Binding SelectedDrugName2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Label x:Name="lblStrD2" Content="{Binding Strength2}" Width="55" Height="25" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                            <Label x:Name="lblUnitD2" Content="{Binding Unit2}" Width="80" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                            <TextBox x:Name="txtDoseD2" Width="50" Height="25" MaxLength="5" Margin="35,0,0,0" TextChanged="CalculateTotalQuantity"/>
+                                            <TextBox x:Name="txtFreqD2" Width="50" Height="25" MaxLength="1" Margin="15,0,0,0" TextChanged="CalculateTotalQuantity"/>
+                                            <TextBox x:Name="txtDurationD2" Width="50" Height="25" MaxLength="3" Margin="15,0,0,0" TextChanged="CalculateTotalQuantity"/>
                                             <TextBox x:Name="txtQTYD2" Width="99" Height="25" MaxLength="3" Margin="25,0,0,0"/>
-                                            <Label x:Name="lblPreCatagoryD2" Content=" " Width="34" Margin="65,0,0,0"/>
+                                            <Label x:Name="lblPreCatagoryD2" Content="{Binding PrescriberCategory2}" Width="34" Margin="65,0,0,0"/>
                                         </StackPanel>
 
                                         <!-- Repeat for 3 to 10 -->

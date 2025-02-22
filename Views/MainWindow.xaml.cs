@@ -36,7 +36,6 @@ namespace PMS_WPF_NET8.Views
         private SQLiteConnection _connection;
         private PatientFunctions _patientFunctions = new PatientFunctions();
         private MainViewModel viewModel = new MainViewModel();
-        private DrugSelectionViewModel _viewModel;
 
         public MainWindow()
         {
@@ -62,11 +61,41 @@ namespace PMS_WPF_NET8.Views
             this.DataContext = viewModel;
             viewModel.LoadData();  // Load data after setting the DataContext
 
+        }
 
+        private void CalculateTotalQuantity(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                string name = textBox.Name;
+                int drugIndex = int.Parse(name.Substring(name.Length - 1)); // Extract the drug index from the TextBox name
 
+                var strengthLabel = FindName($"lblStrD{drugIndex}") as Label;
+                var doseTextBox = FindName($"txtDoseD{drugIndex}") as TextBox;
+                var freqTextBox = FindName($"txtFreqD{drugIndex}") as TextBox;
+                var durationTextBox = FindName($"txtDurationD{drugIndex}") as TextBox;
+                var qtyTextBox = FindName($"txtQTYD{drugIndex}") as TextBox;
+
+                if (strengthLabel != null && doseTextBox != null && freqTextBox != null && durationTextBox != null && qtyTextBox != null)
+                {
+                    viewModel.CalculateTotalQuantity(
+                        strengthLabel.Content.ToString(),
+                        doseTextBox.Text,
+                        freqTextBox.Text,
+                        durationTextBox.Text,
+                        out string totalQuantity
+                    );
+
+                    qtyTextBox.Text = totalQuantity;
+                }
+            }
         }
 
         private void SavePatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            SavePatient();
+        }
+        private void SavePatient()
         {
             List<DrugInfo> drugList = GetDrugList();
 
